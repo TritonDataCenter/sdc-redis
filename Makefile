@@ -1,20 +1,22 @@
 NAME=redis
+DOC_FILES=index.restdown
 
 ifeq ($(VERSION), "")
     @echo "Use gmake"
 endif
 
-TAR = tar
 
-ifeq ($(TIMESTAMP),)
-    TIMESTAMP=$(shell date -u "+%Y%m%dT%H%M%SZ")
-endif
+include ./tools/mk/Makefile.defs
 
-REDIS_PUBLISH_VERSION := $(shell git symbolic-ref HEAD | \
-      awk -F / '{print $$3}')-$(TIMESTAMP)-g$(shell \
-                git describe --all --long | awk -F '-g' '{print $$NF}')
 
-RELEASE_TARBALL=redis-pkg-$(REDIS_PUBLISH_VERSION).tar.bz2
+TAR=tar
+RELEASE_TARBALL=redis-pkg-$(STAMP).tar.bz2
+CLEAN_FILES += redis-pkg-*.tar.bz2
+
+
+#
+# Targets
+#
 
 .PHONY: all
 
@@ -33,5 +35,6 @@ publish:
 	mkdir -p $(BITS_DIR)/redis
 	cp $(RELEASE_TARBALL) $(BITS_DIR)/redis/$(RELEASE_TARBALL)
 
-clean:
-	rm -fr redis-pkg-*.tar.bz2
+
+include ./tools/mk/Makefile.deps
+include ./tools/mk/Makefile.targ

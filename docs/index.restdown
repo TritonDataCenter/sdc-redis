@@ -1,0 +1,48 @@
+---
+title: SDC Redis Zone
+markdown2extras: wiki-tables, code-friendly, cuddled-lists
+apisections: Master API: Monitors, Master API: Probes, Master API: Alarms, Master API: Maintenance Windows, Master API: Miscellaneous, Relay API, Relay Admin API
+---
+
+# SDC Redis Zone
+
+SDC 7 has a redis zone. This repo builds it. The sdc "redis" zone is a core
+zone shared by a few SDC services. The purpose of this document is to identify
+those services and ensure they don't collide.
+
+A redis instance can have a number of separate databases. By default this is
+16, and the current redis config doesn't change that. A redis connection
+can select the DB it is using with the [SELECT](http://redis.io/commands/select)
+command.
+
+**Warning: Do NOT use the [FLUSHALL]
+
+# Databases
+
+||**Database Index**||**Service**||
+||0||None. `0` is the default index. By design, no SDC service should use this index. This forces legal redis clients to explicitly choose an assigned DB index.||
+||1||Amon (the 'amon-master' service in the 'amon' zone).||
+||2||CNAPI||
+||3||AdminUI||
+
+
+# Operators Guide
+
+This section is intended to give necessary information for diagnosing and
+dealing with issues with the "redis" zone in a SmartDataCenter installation.
+
+To find the redis zone(s) use the following. Currently there is only one,
+though redis clustering *might* be possible at some point.
+
+    sdc-vmapi /vms?owner_uuid=$(bash /lib/sdc/config.sh -json | json ufds_admin_uuid) \
+        | json -H -c "tags.smartdc_role=='redis'"
+
+Look at the "redis" service.
+
+## Logs
+
+||**service/path**||**where**||**format**||**tail -f**||
+||amon-master||in each "amon" zone||[Bunyan](https://github.com/trentm/node-bunyan)||`` sdc-login amon; tail -f `svcs -L amon-master` | bunyan ``||
+||amon-relay||in each GZ||[Bunyan](https://github.com/trentm/node-bunyan)||`` tail -f `svcs -L amon-relay` | bunyan ``||
+||amon-agent||in each GZ and in some zones||[Bunyan](https://github.com/trentm/node-bunyan)||`` tail -f `svcs -L amon-agent` | bunyan ``||
+
