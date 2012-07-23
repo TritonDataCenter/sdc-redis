@@ -19,7 +19,7 @@ command.
 
 # Databases
 
-||**Database Index**||**Service**||
+||**DB Index**||**Service**||
 ||0||None. `0` is the default index. By design, no SDC service should use this index. This forces legal redis clients to explicitly choose an assigned DB index.||
 ||1||Amon (the 'amon-master' service in the 'amon' zone).||
 ||2||CNAPI||
