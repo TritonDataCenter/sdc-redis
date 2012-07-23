@@ -15,7 +15,9 @@ A redis instance can have a number of separate databases. By default this is
 can select the DB it is using with the [SELECT](http://redis.io/commands/select)
 command.
 
-**Warning: Do NOT use the [FLUSHALL]
+**Warning: Do NOT use the [FLUSHALL](http://www.redis.io/commands/flushall)!
+This will blow away data for other apps. Instead use
+[FLUSHDB](http://www.redis.io/commands/flushdb).**
 
 # Databases
 
