@@ -26,6 +26,7 @@ This will blow away data for other apps. Instead use
 ||1||Amon (the 'amon-master' service in the 'amon' zone).||
 ||2||CNAPI||
 ||3||AdminUI||
+||4||VMAPI||
 
 
 # Operators Guide
