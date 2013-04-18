@@ -5,7 +5,7 @@
 - Docs: <https://mo.joyent.com/docs/redis>
 - Tickets/bugs: <https://devhub.joyent.com/jira/browse/HEAD>
 - CI builds: <https://jenkins.joyent.us/job/redis>,
-  <https://stuff.joyent.us/stuff/builds/redis/>
+  <https://bits.joyent.us/builds/redis/>
 
 
 This repo is responsible for building the fs-tarball for the SmartDataCenter
