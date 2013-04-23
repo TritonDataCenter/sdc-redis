@@ -42,10 +42,9 @@ though redis clustering *might* be possible at some point.
 
 Look at the "redis" service.
 
+
 ## Logs
 
-||**service/path**||**where**||**format**||**tail -f**||
-||amon-master||in each "amon" zone||[Bunyan](https://github.com/trentm/node-bunyan)||`` sdc-login amon; tail -f `svcs -L amon-master` | bunyan ``||
-||amon-relay||in each GZ||[Bunyan](https://github.com/trentm/node-bunyan)||`` tail -f `svcs -L amon-relay` | bunyan ``||
-||amon-agent||in each GZ and in some zones||[Bunyan](https://github.com/trentm/node-bunyan)||`` tail -f `svcs -L amon-agent` | bunyan ``||
+||**service/path**||**where**||**tail -f**||
+||redis||in each "redis" zone||`` sdc-login redis; tail -f /var/log/redis/redis.log ``||
 
