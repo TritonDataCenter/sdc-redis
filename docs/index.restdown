@@ -1,7 +1,6 @@
 ---
 title: SDC Redis Zone
 markdown2extras: wiki-tables, code-friendly, cuddled-lists
-apisections: Master API: Monitors, Master API: Probes, Master API: Alarms, Master API: Maintenance Windows, Master API: Miscellaneous, Relay API, Relay Admin API
 ---
 
 # SDC Redis Zone
@@ -23,7 +22,7 @@ This will blow away data for other apps. Instead use
 
 ||**DB Index**||**Service**||
 ||0||None. `0` is the default index. By design, no SDC service should use this index. This forces legal redis clients to explicitly choose an assigned DB index.||
-||1||Amon (the 'amon-master' service in the 'amon' zone).||
+||1||**No one. Do not re-use.** Amon used to use this, but now uses its own amonredis zone.||
 ||2||CNAPI||
 ||3||AdminUI||
 ||4||VMAPI||
