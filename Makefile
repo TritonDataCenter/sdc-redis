@@ -20,7 +20,7 @@ CLEAN_FILES += redis-pkg-*.tar.bz2
 
 .PHONY: all
 
-all:
+all: sdc-scripts
 
 release: $(RELEASE_TARBALL)
 
