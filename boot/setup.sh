@@ -35,6 +35,14 @@ mkdir -p /data/redis /var/log/redis
 /usr/bin/chown -R redis:redis /opt/redis /data/redis /var/log/redis
 rm -f /var/svc/redis-2.4.1.tar.bz2
 
+echo "Adding log rotation"
+sdc_log_rotation_add amon-agent /var/svc/log/*amon-agent*.log 1g
+sdc_log_rotation_add config-agent /var/svc/log/*config-agent*.log 1g
+sdc_log_rotation_add registrar /var/svc/log/*registrar*.log 1g
+sdc_log_rotation_add $role /var/svc/log/*$role*.log 1g
+sdc_log_rotation_add $role /var/log/redis/*redis*.log 1g
+sdc_log_rotation_setup_end
+
 # All done, run boilerplate end-of-setup
 sdc_setup_complete
 
