@@ -9,7 +9,6 @@
 #
 
 NAME=redis
-DOC_FILES=index.restdown
 
 ifeq ($(VERSION), "")
     @echo "Use gmake"

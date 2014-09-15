@@ -8,15 +8,11 @@
     Copyright (c) 2014, Joyent, Inc.
 -->
 
-# SDC Redis Zone
+# sdc-redis
 
-- Repository: <git@git.joyent.com:redis.git>, <https://mo.joyent.com/redis>
-- Who: Josh, Trent
-- Docs: <https://mo.joyent.com/docs/redis>
-- Tickets/bugs: <https://devhub.joyent.com/jira/browse/HEAD>
-- CI builds: <https://jenkins.joyent.us/job/redis>,
-  <https://bits.joyent.us/builds/redis/>
-
+This repository is part of the Joyent SmartDataCenter project (SDC).  For
+contribution guidelines, issues, and general documentation, visit the main
+[SDC](http://github.com/joyent/sdc) project page.
 
 This repo is responsible for building the fs-tarball for the SmartDataCenter
 (SDC) "redis" zone. See the docs for more details.
@@ -24,7 +20,26 @@ This repo is responsible for building the fs-tarball for the SmartDataCenter
 
 # Building
 
-    git clone git@git.joyent.com:redis.git
+    git clone git@github.com:joyent/redis.git
     cd redis
     make release
 
+
+# Operators Guide
+
+This section is intended to give necessary information for diagnosing and
+dealing with issues with the "redis" zone in a SmartDataCenter installation.
+
+To find the redis zone(s) use the following. Currently there is only one,
+though redis clustering *might* be possible at some point.
+
+    sdc-vmapi /vms?owner_uuid=$(bash /lib/sdc/config.sh -json | json ufds_admin_uuid) \
+        | json -H -c "this.tags.smartdc_role=='redis'"
+
+Look at the "redis" service.
+
+
+## Logs
+
+||**service/path**||**where**||**tail -f**||
+||redis||in each "redis" zone||`` sdc-login redis; tail -f /var/log/redis/redis.log ``||
